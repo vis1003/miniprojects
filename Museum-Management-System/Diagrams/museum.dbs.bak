@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="museumDB" id="Project-b86" database="MySql" >
 	<schema name="museumdb" >
-		<table name="artifact" prior="artifakt" generator_rows="150" >
+		<table name="artifact" prior="artifakt" >
 			<column name="artifact_id" type="INT" jt="4" mandatory="y" />
 			<column name="name" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<column name="description" type="TEXT" jt="-1" />
 			<column name="acquisition_date" type="DATE" jt="91" />
 			<column name="condition" type="VARCHAR" length="255" jt="12" />
 			<column name="artist_id" type="INT" jt="4" mandatory="y" />
-			<column name="category_id" type="INT" jt="4" mandatory="y" />
 			<index name="pk_artifact" unique="PRIMARY_KEY" >
 				<column name="artifact_id" />
 			</index>
 			<fk name="artist_id" to_schema="museumdb" to_table="artist" >
 				<fk_column name="artist_id" pk="artist_id" />
 			</fk>
-			<fk name="category_id" to_schema="museumdb" to_table="category" >
-				<fk_column name="category_id" pk="category_id" />
-			</fk>
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
-		<table name="artifact_exhibition" prior="tbl_0" generator_rows="225" >
+		<table name="artifact_exhibition" prior="tbl_0" >
 			<column name="artifact_id" type="INT" jt="4" mandatory="y" />
 			<column name="exhibition_id" type="INT" jt="4" mandatory="y" />
-			<column name="curator_id" type="INT" jt="4" mandatory="y" />
 			<index name="artifact_exhibition" unique="PRIMARY_KEY" >
 				<column name="artifact_id" />
 				<column name="exhibition_id" />
@@ -34,12 +29,9 @@
 			<fk name="artifact_id" to_schema="museumdb" to_table="artifact" >
 				<fk_column name="artifact_id" pk="artifact_id" />
 			</fk>
-			<fk name="curator_id" to_schema="museumdb" to_table="curator" >
-				<fk_column name="curator_id" pk="curator_id" />
-			</fk>
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
-		<table name="artist" prior="tbl_0" generator_rows="100" >
+		<table name="artist" prior="tbl_0" >
 			<column name="artist_id" type="INT" jt="4" mandatory="y" />
 			<column name="name" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<column name="nationality" type="VARCHAR" length="50" jt="12" />
@@ -50,7 +42,7 @@
 			</index>
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
-		<table name="category" prior="tbl_0" generator_rows="100" >
+		<table name="category" prior="tbl_0" >
 			<column name="category_id" type="INT" jt="4" mandatory="y" />
 			<column name="name" type="VARCHAR" length="50" jt="12" mandatory="y" />
 			<column name="description" type="TEXT" jt="-1" />
@@ -59,53 +51,46 @@
 			</index>
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
-		<table name="curator" prior="tbl_0" generator_rows="100" >
+		<table name="curator" prior="tbl_0" >
 			<column name="curator_id" type="INT" jt="4" mandatory="y" />
 			<column name="name" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<column name="department" type="VARCHAR" length="50" jt="12" mandatory="y" />
 			<column name="email_id" type="VARCHAR" length="255" jt="12" mandatory="y" />
-			<column name="artifact_id" type="INT" jt="4" mandatory="y" />
 			<index name="pk_curator" unique="PRIMARY_KEY" >
 				<column name="curator_id" />
 			</index>
-			<fk name="artifact_id" to_schema="museumdb" to_table="artifact" >
-				<fk_column name="artifact_id" pk="artifact_id" />
-			</fk>
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
-		<table name="exhibition" prior="tbl_0" generator_rows="150" >
+		<table name="exhibition" prior="tbl_0" >
 			<column name="exhibition_id" type="INT" jt="4" mandatory="y" />
 			<column name="name" type="VARCHAR" length="255" jt="12" mandatory="y" />
 			<column name="start_date" type="DATE" jt="91" mandatory="y" />
 			<column name="end_date" type="DATE" jt="91" mandatory="y" />
 			<column name="location" type="VARCHAR" length="255" jt="12" mandatory="y" />
+			<column name="curator_id" type="INT" jt="4" mandatory="y" />
 			<index name="pk_exhibition" unique="PRIMARY_KEY" >
 				<column name="exhibition_id" />
 			</index>
+			<fk name="curator_id" to_schema="museumdb" to_table="curator" >
+				<fk_column name="curator_id" pk="curator_id" />
+			</fk>
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
 		<table name="tbl" />
 	</schema>
-	<layout name="Default Layout" id="Layout-1683" joined_routing="y" show_column_type="y" show_relation="columns" >
-		<entity schema="museumdb" name="artifact" color="BED3F4" x="416" y="272" />
-		<entity schema="museumdb" name="artifact_exhibition" color="BED3F4" x="752" y="320" />
-		<entity schema="museumdb" name="artist" color="BED3F4" x="144" y="272" />
-		<entity schema="museumdb" name="category" color="BED3F4" x="144" y="528" />
-		<entity schema="museumdb" name="curator" color="BED3F4" x="688" y="480" />
-		<entity schema="museumdb" name="exhibition" color="BED3F4" x="944" y="480" />
-		<callout x="48" y="80" pointer="Round" >
+	<layout name="Default Layout" id="Layout-1683" show_relation="columns" >
+		<entity schema="museumdb" name="artifact" color="C1D8EE" x="320" y="272" />
+		<entity schema="museumdb" name="artifact_exhibition" color="C1D8EE" x="96" y="464" />
+		<entity schema="museumdb" name="artist" color="C1D8EE" x="608" y="288" />
+		<entity schema="museumdb" name="category" color="C1D8EE" x="800" y="304" />
+		<entity schema="museumdb" name="curator" color="C1D8EE" x="1088" y="336" />
+		<entity schema="museumdb" name="exhibition" color="C1D8EE" x="336" y="560" />
+		<callout x="48" y="48" pointer="Round" >
 			<comment><![CDATA[This is a layout - a diagram with tools.
 - Right-click the layout to create new tables. 
 - Double-click table headers to edit. 
 - For a better understanding of the schema, create multiple layouts.
 - Save the design to the model file, and deploy from 'Schema / Create into the database'.]]></comment>
 		</callout>
-		<group name="artifact" color="ECF0F7" >
-			<entity schema="museumdb" name="artist" />
-			<entity schema="museumdb" name="category" />
-			<entity schema="museumdb" name="artifact" />
-			<entity schema="museumdb" name="artifact_exhibition" />
-			<entity schema="museumdb" name="exhibition" />
-			<entity schema="museumdb" name="curator" />
-		</group>
 	</layout>
 </project>
