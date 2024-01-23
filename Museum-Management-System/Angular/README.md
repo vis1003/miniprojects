@@ -9,8 +9,14 @@ Backend - MySQL
 ```
 npm install -g @angular/cli
 ```
-
-**DO NOT RUN AGAIN**
+---
+Create new application **[DO NOT RUN AGAIN]**
 ```
 ng new Museum 
+```
+---
+
+Start the application 
+```
+ng serve
 ```
