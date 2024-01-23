@@ -16,6 +16,9 @@ ng new Museum
 ```
 ---
 
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
 Start the application 
 ```
 ng serve
