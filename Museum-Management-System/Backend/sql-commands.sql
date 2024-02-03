@@ -45,9 +45,9 @@ create table ARTIFACT_EXHIBITION(
     exhibition_id int,
     curator_id int,
     primary key(artifact_id,exhibition_id),
-    foreign key (artifact_id) references ARTIFACT(artifact_id),
-    foreign key (curator_id) references CURATOR(curator_id),
-    foreign key (exhibition_id) references EXHIBITION(exhibition_id)
+    foreign key (artifact_id) references ARTIFACT(artifact_id) on delete set null,
+    foreign key (curator_id) references CURATOR(curator_id) on delete set null,
+    foreign key (exhibition_id) references EXHIBITION(exhibition_id) on delete cascade
 );
 
 
@@ -98,6 +98,16 @@ VALUES
 (8, 'Migrant Mother', 'Documentary photograph capturing hardship', '1936-01-01', 'Fair', 6, 3, 3),
 (9, 'Les Demoiselles d''Avignon', 'Avant-garde painting', '1907-01-01', 'Excellent', 4, 1, 4),
 (10, 'The Persistence of Memory', 'Surrealist painting with melting clocks', '1931-01-01', 'Very Good', 5, 1, 5);
+
+-- EXHIBITION
+INSERT INTO EXHIBITION (exhibition_id, name, start_date, end_date, location) 
+VALUES
+(1, 'Impressionist Masterpieces', '2024-03-01', '2024-05-01', 'Art Museum A'),
+(2, 'Sculpture Showcase', '2024-06-15', '2024-08-15', 'Sculpture Gallery B'),
+(3, 'Photography Through Time', '2024-09-10', '2024-11-10', 'Photography Hall C'),
+(4, 'Modern Art Extravaganza', '2025-01-02', '2025-03-02', 'Contemporary Art Space D'),
+(5, 'Avant-Garde Wonders', '2025-05-15', '2025-07-15', 'Avant-Garde Gallery E');
+
 
 -- ARTIFACT_EXHIBITION
 INSERT INTO ARTIFACT_EXHIBITION (artifact_id, exhibition_id, curator_id) 
