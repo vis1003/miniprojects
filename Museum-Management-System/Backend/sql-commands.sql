@@ -17,13 +17,13 @@ create table ARTIFACT(
     name varchar(255),
     description text,
     acquisition_date date,
-    condition varchar(255),
+    artifact_condition varchar(255),
     artist_id int,
     category_id int,
     curator_id int,
-    foreign key (artist_id) references ARTIST(artist_id) on delete no action,
-    foreign key (category_id) references CATEGORY(category_id) on delete no action,
-    foreign key (curator_id) references CURATOR(curator_id) on delete no action
+    foreign key (artist_id) references ARTIST(artist_id) on delete set null,
+    foreign key (category_id) references CATEGORY(category_id) on delete set null,
+    foreign key (curator_id) references CURATOR(curator_id) on delete set null
 );
 
 create table CURATOR(
@@ -45,8 +45,8 @@ create table ARTIFACT_EXHIBITION(
     exhibition_id int,
     curator_id int,
     primary key(artifact_id,exhibition_id),
-    foreign key (artifact_id) references ARTIFACT(artifact_id) on delete no action,
-    foreign key (curator_id) references CURATOR(curator_id) on delete no action,
+    foreign key (artifact_id) references ARTIFACT(artifact_id) on delete set null,
+    foreign key (curator_id) references CURATOR(curator_id) on delete set null,
     foreign key (exhibition_id) references EXHIBITION(exhibition_id) on delete cascade
 );
 
