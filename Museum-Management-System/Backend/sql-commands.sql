@@ -47,7 +47,7 @@ create table ARTIFACT_EXHIBITION(
     primary key(artifact_id,exhibition_id),
     foreign key (artifact_id) references ARTIFACT(artifact_id) on delete no action,
     foreign key (curator_id) references CURATOR(curator_id) on delete no action,
-    foreign key (exhibition_id) references EXHIBITION(exhibition_id) on delete set null
+    foreign key (exhibition_id) references EXHIBITION(exhibition_id) on delete no action
 );
 
 
