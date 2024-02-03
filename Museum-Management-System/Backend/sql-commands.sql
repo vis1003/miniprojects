@@ -15,7 +15,7 @@ create table CATEGORY(
 create table CURATOR(
     curator_id int primary key,
     name varchar(255),
-    email_id varchar(255),
+    email_id varchar(255)
 );
 
 create table ARTIFACT(
