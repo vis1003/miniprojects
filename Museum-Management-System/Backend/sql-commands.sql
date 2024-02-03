@@ -86,7 +86,7 @@ VALUES
 (5, 'Sophie Brown', 'sophie@email.com');
 
 -- ARTIFACT
-INSERT INTO ARTIFACT (artifact_id, name, description, acquisition_date, condition, artist_id, category_id, curator_id) 
+INSERT INTO ARTIFACT (artifact_id, name, description, acquisition_date, artifact_condition, artist_id, category_id, curator_id) 
 VALUES
 (1, 'Mona Lisa', 'Famous portrait painting', '1503-01-01', 'Excellent', 1, 1, 1),
 (2, 'Starry Night', 'Iconic night sky painting', '1889-01-01', 'Good', 2, 1, 2),
