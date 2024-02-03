@@ -21,9 +21,9 @@ create table ARTIFACT(
     artist_id int,
     category_id int,
     curator_id int,
-    foreign key (artist_id) references ARTIST(artist_id) on delete set null,
-    foreign key (category_id) references CATEGORY(category_id) on delete set null,
-    foreign key (curator_id) references CURATOR(curator_id) on delete set null
+    foreign key (artist_id) references ARTIST(artist_id) on delete no action,
+    foreign key (category_id) references CATEGORY(category_id) on delete no action,
+    foreign key (curator_id) references CURATOR(curator_id) on delete no action
 );
 
 create table CURATOR(
@@ -45,8 +45,8 @@ create table ARTIFACT_EXHIBITION(
     exhibition_id int,
     curator_id int,
     primary key(artifact_id,exhibition_id),
-    foreign key (artifact_id) references ARTIFACT(artifact_id) on delete set null,
-    foreign key (curator_id) references CURATOR(curator_id) on delete set null,
+    foreign key (artifact_id) references ARTIFACT(artifact_id) on delete no action,
+    foreign key (curator_id) references CURATOR(curator_id) on delete no action,
     foreign key (exhibition_id) references EXHIBITION(exhibition_id) on delete cascade
 );
 
