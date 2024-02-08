@@ -12,7 +12,7 @@ npm install -g @angular/cli
 ---
 Create new application **[DO NOT RUN AGAIN]**
 ```
-ng new Museum 
+ng new --minimal --routing --style=scss Museum-app
 ```
 ---
 To enable your system to execute script in PowerShell
