@@ -50,7 +50,7 @@ app.get('/artist', (req, res) => {
   });
 });
 
-// fetch artist detail based on artist id from ARTIST table
+// fetch artist detail based on artist_id from ARTIST table
 app.get('/artist/:id', (req, res) => {
 
   let artistID = req.params.id;
@@ -100,7 +100,7 @@ app.get('/category', (req, res) => {
   });
 });
 
-// fetch category detail based on artist id from CATEGORY table
+// fetch category detail based on category_id from CATEGORY table
 app.get('/category/:id', (req, res) => {
 
   let categoryId = req.params.id;
@@ -120,6 +120,157 @@ app.get('/category/:id', (req, res) => {
     }
     else {
       res.status(404).send('Category not found');
+    }
+  });
+});
+
+// fetch all curator details from CURATOR table
+app.get('/curator', (req, res) => {
+
+  let qr = `select * from CURATOR`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    if (result.length > 0) {
+      res.send({
+        message: 'Curator data retrieved successfully',
+        data: result
+      });
+    }
+    else {
+      res.send({
+        message: 'No Curator data found',
+        data: []
+      });
+    }
+  });
+});
+
+// fetch curator detail based on curator_id from CURATOR table
+app.get('/curator/:id', (req, res) => {
+
+  let curatorId = req.params.id;
+  let qr = `select * from CURATOR where curator_id = ${curatorId}`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    if (result.length > 0) {
+      res.send({
+        message: 'Curator data retrieved successfully',
+        data: result
+      });
+    }
+    else {
+      res.status(404).send('Curator not found');
+    }
+  });
+});
+
+// fetch all artifact details from ARTIFACT table
+app.get('/artifact', (req, res) => {
+
+  let qr = `SELECT artifact_id, name, description, DATE_FORMAT(acquisition_date, '%Y-%m-%d') AS acquisition_date, artifact_condition, artist_id, category_id, curator_id FROM ARTIFACT`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    if (result.length > 0) {
+      res.send({
+        message: 'Artifact data retrieved successfully',
+        data: result
+      });
+    }
+    else {
+      res.send({
+        message: 'No Artifact data found',
+        data: []
+      });
+    }
+  });
+});
+
+// fetch artifact detail based on artifact_id from ARTIFACT table
+app.get('/artifact/:id', (req, res) => {
+
+  let artifactId = req.params.id;
+  let qr = `SELECT artifact_id, name, description, DATE_FORMAT(acquisition_date, '%Y-%m-%d') AS acquisition_date, artifact_condition, artist_id, category_id, curator_id FROM ARTIFACT where artifact_id = ${artifactId}`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    if (result.length > 0) {
+      res.send({
+        message: 'Artifact data retrieved successfully',
+        data: result
+      });
+    }
+    else {
+      res.status(404).send('Artifact not found');
+    }
+  });
+});
+
+
+// fetch all exhibition details from EXHIBITION table
+app.get('/exhibition', (req, res) => {
+
+  let qr = `SELECT exhibition_id, name, DATE_FORMAT(start_date, '%Y-%m-%d') AS start_date, DATE_FORMAT(end_date, '%Y-%m-%d') AS end_date, location FROM EXHIBITION`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    if (result.length > 0) {
+      res.send({
+        message: 'Exhibition data retrieved successfully',
+        data: result
+      });
+    }
+    else {
+      res.send({
+        message: 'No Exhibition data found',
+        data: []
+      });
+    }
+  });
+});
+
+// fetch exhibition detail based on exhibition_id from EXHIBITION table
+app.get('/exhibition/:id', (req, res) => {
+
+  let exhibtionId = req.params.id;
+  let qr = `SELECT exhibition_id, name, DATE_FORMAT(start_date, '%Y-%m-%d') AS start_date, DATE_FORMAT(end_date, '%Y-%m-%d') AS end_date, location FROM EXHIBITION where exhibition_id = ${exhibtionId}`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    if (result.length > 0) {
+      res.send({
+        message: 'Exhibition data retrieved successfully',
+        data: result
+      });
+    }
+    else {
+      res.status(404).send('Exhibition not found');
     }
   });
 });
