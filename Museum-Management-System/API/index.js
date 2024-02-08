@@ -21,6 +21,24 @@ db.connect((err) => {
   console.log('Connected to MySQL database');
 });
 
+
+app.get('/artists', (req, res) => {
+
+  let qr = 'select * from ARTIST';
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err, 'errs');
+    }
+    if (result.length > 0) {
+      res.send({
+        message: 'artist data',
+        data: result
+      });
+    }
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
