@@ -22,6 +22,12 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 ```
 npm install
 ```
+To import bulma css
+```
+npm install --save bulma
+```
+> Get the path of bulma.css from *node_modules -> bulma -> css -> bulma.css* and paste the path in *angular.json -> styles section*
+
 Start the application 
 ```
 ng serve
