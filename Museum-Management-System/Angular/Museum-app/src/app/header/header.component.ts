@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   <div class="navbar is-dark">
     <div class="navbar-brand">
       <a class="navbar-item">
-        <img src="">
+        <img src="../assets/img/museum-logo.png">
       </a>
     </div>
 
