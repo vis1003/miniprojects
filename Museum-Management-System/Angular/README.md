@@ -12,7 +12,7 @@ npm install -g @angular/cli
 ---
 Create new application **[DO NOT RUN AGAIN]**
 ```
-ng new --minimal --routing --style=scss Museum-app
+ng new --minimal --no-standalone --ssr=false --routing --style=scss Museum-app
 ```
 ---
 To enable your system to execute script in PowerShell
@@ -25,4 +25,8 @@ npm install
 Start the application 
 ```
 ng serve
+```
+To create new component
+```
+ng generate component <component-name>
 ```
