@@ -10,6 +10,7 @@ import { ExhibitionsComponent } from './exhibitions/exhibitions.component';
 import { CuratorsComponent } from './curators/curators.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CategoriesComponent } from './categories/categories.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

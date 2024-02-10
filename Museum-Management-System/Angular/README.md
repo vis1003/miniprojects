@@ -32,7 +32,11 @@ Start the application
 ```
 ng serve
 ```
-To create new component
+To create new component (in Museum-app)
 ```
 ng generate component <component-name>
+```
+To create a service to get API data
+```
+ng g service services/<service-name>
 ```
