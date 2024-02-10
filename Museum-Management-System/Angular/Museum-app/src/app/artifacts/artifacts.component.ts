@@ -14,21 +14,21 @@ import { AllDataService } from '../services/all-data.service';
           <th>Description</th>
           <th>Acquisition Date</th>
           <th>Condition</th>
-          <th>Artist ID</th>
-          <th>Category ID</th>
-          <th>Curator ID</th>
+          <th>Artist</th>
+          <th>Category</th>
+          <th>Curator</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of artifactData['data']">
           <td>{{item.artifact_id}}</td>
-          <td>{{item.name}}</td>
-          <td>{{item.description}}</td>
+          <td>{{item.artifact_name}}</td>
+          <td>{{item.artifact_description}}</td>
           <td>{{item.acquisition_date}}</td>
           <td>{{item.artifact_condition}}</td>
-          <td>{{item.artist_id}}</td>
-          <td>{{item.category_id}}</td>
-          <td>{{item.curator_id}}</td>
+          <td>{{item.artist_name}}</td>
+          <td>{{item.category_name}}</td>
+          <td>{{item.curator_name}}</td>
         </tr>
       </tbody>
     </table>
