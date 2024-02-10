@@ -177,7 +177,7 @@ app.get('/curator/:id', (req, res) => {
 // fetch all artifact details from ARTIFACT table
 app.get('/artifact', (req, res) => {
 
-  let qr = `SELECT artifact_id, name, description, DATE_FORMAT(acquisition_date, '%Y-%m-%d') AS acquisition_date, artifact_condition, artist_id, category_id, curator_id FROM ARTIFACT`;
+  let qr = `SELECT A.artifact_id, A.name AS artifact_name, A.description AS artifact_description, DATE_FORMAT(A.acquisition_date, '%Y-%m-%d') AS acquisition_date, A.artifact_condition, AR.name AS artist_name, C.name AS category_name, CR.name AS curator_name FROM ARTIFACT A INNER JOIN ARTIST AR ON A.artist_id = AR.artist_id INNER JOIN CATEGORY C ON A.category_id = C.category_id INNER JOIN CURATOR CR ON A.curator_id = CR.curator_id`;
 
   db.query(qr, (err, result) => {
     if (err) {
@@ -204,7 +204,7 @@ app.get('/artifact', (req, res) => {
 app.get('/artifact/:id', (req, res) => {
 
   let artifactId = req.params.id;
-  let qr = `SELECT artifact_id, name, description, DATE_FORMAT(acquisition_date, '%Y-%m-%d') AS acquisition_date, artifact_condition, artist_id, category_id, curator_id FROM ARTIFACT where artifact_id = ${artifactId}`;
+  let qr = `SELECT A.artifact_id, A.name AS artifact_name, A.description AS artifact_description, DATE_FORMAT(A.acquisition_date, '%Y-%m-%d') AS acquisition_date, A.artifact_condition, AR.name AS artist_name, C.name AS category_name, CR.name AS curator_name FROM ARTIFACT A INNER JOIN ARTIST AR ON A.artist_id = AR.artist_id INNER JOIN CATEGORY C ON A.category_id = C.category_id INNER JOIN CURATOR CR ON A.curator_id = CR.curator_id where artifact_id = ${artifactId}`;
 
   db.query(qr, (err, result) => {
     if (err) {
