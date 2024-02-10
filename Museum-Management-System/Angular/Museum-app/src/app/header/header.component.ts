@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-header',
   template: `
-  <div class="navbar is-dark">
+  <div style="padding-top: 64px;">
+  <div class="navbar is-dark is-fixed-top">
     <div class="navbar-brand">
       <a class="navbar-item">
         <img src="../assets/img/museum-logo.png">
@@ -21,6 +22,7 @@ import { Component } from '@angular/core';
       </div>
     </div>
   </div>
+</div>
   `,
   styles: ``
 })

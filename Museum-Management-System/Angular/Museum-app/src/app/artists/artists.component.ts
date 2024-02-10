@@ -6,7 +6,7 @@ import { AllDataService } from '../services/all-data.service';
   template: `
     <p class="title is-2" style="padding: 1%;">Artists</p>
 
-    <table class="table" style="margin: 2%;">
+    <table class="table is-hoverable is-bordered" style="margin: 1%;">
       <thead>
         <tr>
           <th>ID</th>
