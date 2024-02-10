@@ -3,9 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-artifacts',
   template: `
-    <p>
-      artifacts works!
-    </p>
+    <p class="title is-2" style="padding: 1%;">Artifacts</p>
   `,
   styles: ``
 })
