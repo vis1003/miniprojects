@@ -191,6 +191,67 @@ app.get('/category/fetch/:id', (req, res) => {
     }
   });
 });
+
+// add new category into the CATEGORY table
+app.post('/category/add', (req, res) => {
+  console.log(req.body, "Category data add");
+  let category_id = req.body.category_id;
+  let category_name = req.body.category_name;
+  let category_description = req.body.category_description;
+
+  let qr = `insert into CATEGORY values(${category_id}, "${category_name}", "${category_description}")`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    res.send({
+      message: 'Category data inserted successfully',
+    });
+  });
+});
+
+// update category data in the CATEGORY table
+app.put('/category/update/:id', (req, res) => {
+  console.log(req.body, "Category data update");
+  let category_id = req.params.id;
+  let category_name = req.body.category_name;
+  let category_description = req.body.category_description;
+
+  let qr = `update CATEGORY set name = '${category_name}', description = '${category_description}' where category_id = ${category_id}`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    res.send({
+      message: 'Category data successfully updated',
+    });
+  });
+});
+
+// delete category data in the CATEGORY table
+app.delete('/category/delete/:id', (req, res) => {
+  let category_id = req.params.id;
+
+  let qr = `delete from CATEGORY where category_id = '${category_id}'`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    res.send({
+      message: 'Category data successfully deleted',
+    });
+  });
+});
+
 // --------------------------------------------------------------
 
 // ----------------------CURATORS------------------------------
