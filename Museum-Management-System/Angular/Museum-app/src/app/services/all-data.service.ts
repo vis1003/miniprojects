@@ -8,7 +8,7 @@ export class AllDataService {
   url = "http://localhost:3000/";
   constructor(private http:HttpClient) { }
   getAllData(entity: string){
-    this.url = this.url+entity
+    this.url = this.url+entity+'/fetch'
     return this.http.get(this.url)
   }
 }
