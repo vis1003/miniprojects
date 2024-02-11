@@ -84,7 +84,7 @@ app.post('/artist/add', (req, res) => {
   let artist_birth_year = req.body.artist_birth_year;
   let artist_death_year = req.body.artist_death_year;
 
-  let qr = `insert into ARTIST values(${artist_id}, ${artist_name}, ${artist_nationality}, ${artist_birth_year}, ${artist_death_year})`;
+  let qr = `insert into ARTIST values(${artist_id}, "${artist_name}", "${artist_nationality}", ${artist_birth_year}, ${artist_death_year})`;
 
   db.query(qr, (err, result) => {
     if (err) {
@@ -92,14 +92,9 @@ app.post('/artist/add', (req, res) => {
       res.status(500).send('Internal server error');
       return;
     }
-    if (result.length > 0) {
-      res.send({
-        message: 'Artist data inserted successfully',
-      });
-    }
-    else {
-      res.status(403).send('Artist data entered incorrectly...');
-    }
+    res.send({
+      message: 'Artist data inserted successfully',
+    });
   });
 });
 
@@ -112,7 +107,7 @@ app.put('/artist/update/:id', (req, res) => {
   let artist_birth_year = req.body.artist_birth_year;
   let artist_death_year = req.body.artist_death_year;
 
-  let qr = `update ARTIST set name = '${artist_name}', nationality = '${artist_nationality}', birth_year = '${artist_birth_year}', death_year = '${artist_death_year}' where artist_id = ${artist_id}`;
+  let qr = `update ARTIST set name = '${artist_name}', nationality = '${artist_nationality}', birth_year = ${artist_birth_year}, death_year = ${artist_death_year} where artist_id = ${artist_id}`;
 
   db.query(qr, (err, result) => {
     if (err) {
