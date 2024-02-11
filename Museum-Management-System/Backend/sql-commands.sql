@@ -43,10 +43,8 @@ create table EXHIBITION(
 create table ARTIFACT_EXHIBITION(
     artifact_id int,
     exhibition_id int,
-    curator_id int,
     primary key(artifact_id,exhibition_id),
     foreign key (artifact_id) references ARTIFACT(artifact_id),
-    foreign key (curator_id) references CURATOR(curator_id),
     foreign key (exhibition_id) references EXHIBITION(exhibition_id) on delete cascade
 );
 
@@ -110,18 +108,18 @@ VALUES
 
 
 -- ARTIFACT_EXHIBITION
-INSERT INTO ARTIFACT_EXHIBITION (artifact_id, exhibition_id, curator_id) 
+INSERT INTO ARTIFACT_EXHIBITION (artifact_id, exhibition_id) 
 VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 2, 3),
-(4, 2, 4),
-(5, 3, 5),
-(6, 3, 1),
-(7, 4, 2),
-(8, 4, 3),
-(9, 5, 4),
-(10, 5, 5);
+(1, 1),
+(2, 1),
+(3, 2),
+(4, 2),
+(5, 3),
+(6, 3),
+(7, 4),
+(8, 4),
+(9, 5),
+(10, 5);
 
 
 SELECT * FROM ARTIST;
