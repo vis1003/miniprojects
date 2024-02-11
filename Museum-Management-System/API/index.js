@@ -417,6 +417,77 @@ app.get('/artifact/fetch/:id', (req, res) => {
     }
   });
 });
+
+// add new artifact into the ARTIFACT table
+app.post('/artifact/add', (req, res) => {
+  console.log(req.body, "Artifact data add");
+  let artifact_id = req.body.artifact_id;
+  let artifact_name = req.body.artifact_name;
+  let artifact_description = req.body.artifact_description;
+  let artifact_acquisition_date = req.body.artifact_acquisition_date;
+  let artifact_condition = req.body.artifact_condition;
+  let artist_id = req.body.artist_id;
+  let category_id = req.body.category_id;
+  let curator_id = req.body.curator_id;
+
+  let qr = `insert into ARTIFACT values(${artifact_id}, "${artifact_name}", "${artifact_description}", "${artifact_acquisition_date}", "${artifact_condition}", ${artist_id}, ${category_id}, ${curator_id})`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    res.send({
+      message: 'Artifact data inserted successfully',
+    });
+  });
+});
+
+// update artifact data in the ARTIFACT table
+app.put('/artifact/update/:id', (req, res) => {
+  console.log(req.body, "Artifact data update");
+  let artifact_id = req.params.id;
+  let artifact_name = req.body.artifact_name;
+  let artifact_description = req.body.artifact_description;
+  let artifact_acquisition_date = req.body.artifact_acquisition_date;
+  let artifact_condition = req.body.artifact_condition;
+  let artist_id = req.body.artist_id;
+  let category_id = req.body.category_id;
+  let curator_id = req.body.curator_id;
+
+  let qr = `update ARTIFACT set name = '${artifact_name}', description = '${artifact_description}', description = '${artifact_acquisition_date}', description = '${artifact_condition}', artist_id = ${artist_id}, category_id = ${category_id}, curator_id = ${curator_id} where artifact_id = ${artifact_id}`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    res.send({
+      message: 'Artifact data successfully updated',
+    });
+  });
+});
+
+// delete artifact data in the ARTIFACT table
+app.delete('/artifact/delete/:id', (req, res) => {
+  let artifact_id = req.params.id;
+
+  let qr = `delete from ARTIFACT where artifact_id = '${artifact_id}'`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    res.send({
+      message: 'Artifact data successfully deleted',
+    });
+  });
+});
+
 // --------------------------------------------------------------
 
 // ----------------------EXHIBITION------------------------------
