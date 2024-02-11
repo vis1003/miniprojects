@@ -541,7 +541,70 @@ app.get('/exhibition/fetch/:id', (req, res) => {
   });
 });
 
+// add new exhibition into the EXHIBITION table
+app.post('/exhibition/add', (req, res) => {
+  console.log(req.body, "Exhibition data add");
+  let exhibition_id = req.body.exhibition_id;
+  let exhibition_name = req.body.exhibition_name;
+  let exhibition_start_date = req.body.exhibition_start_date;
+  let exhibition_end_date = req.body.exhibition_end_date;
+  let exhibition_location = req.body.exhibition_location;
 
+  let qr = `insert into EXHIBITION values(${exhibition_id}, "${exhibition_name}", "${exhibition_start_date}", "${exhibition_end_date}", "${exhibition_location}")`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    res.send({
+      message: 'Exhibition data inserted successfully',
+    });
+  });
+});
+
+// update exhibition data in the EXHIBITION table
+app.put('/exhibition/update/:id', (req, res) => {
+  console.log(req.body, "Exhibition data update");
+  let exhibition_id = req.params.id;
+  let exhibition_name = req.body.exhibition_name;
+  let exhibition_start_date = req.body.exhibition_start_date;
+  let exhibition_end_date = req.body.exhibition_end_date;
+  let exhibition_location = req.body.exhibition_location;
+
+  let qr = `update EXHIBITION set name = '${exhibition_name}', start_date = '${exhibition_start_date}', end_date = '${exhibition_end_date}', location = '${exhibition_location}' where exhibition_id = ${exhibition_id}`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    res.send({
+      message: 'Exhibition data successfully updated',
+    });
+  });
+});
+
+// delete exhibition data in the EXHIBITION table
+app.delete('/exhibition/delete/:id', (req, res) => {
+  let exhibition_id = req.params.id;
+
+  let qr = `delete from EXHIBITION where exhibition_id = '${exhibition_id}'`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    res.send({
+      message: 'Exhibition data successfully deleted',
+    });
+  });
+});
+// --------------------------------------------------------------
 
 // Listen on port 3000
 app.listen(PORT, () => {
