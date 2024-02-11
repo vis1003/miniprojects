@@ -304,6 +304,67 @@ app.get('/curator/fetch/:id', (req, res) => {
     }
   });
 });
+
+// add new curator into the CURATOR table
+app.post('/curator/add', (req, res) => {
+  console.log(req.body, "Curator data add");
+  let curator_id = req.body.curator_id;
+  let curator_name = req.body.curator_name;
+  let curator_email = req.body.curator_email;
+
+  let qr = `insert into CURATOR values(${curator_id}, "${curator_name}", "${curator_email}")`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    res.send({
+      message: 'Curator data inserted successfully',
+    });
+  });
+});
+
+// update curator data in the CURATOR table
+app.put('/curator/update/:id', (req, res) => {
+  console.log(req.body, "Curator data update");
+  let curator_id = req.params.id;
+  let curator_name = req.body.curator_name;
+  let curator_email = req.body.curator_email;
+
+  let qr = `update CURATOR set name = '${curator_name}', email_id = '${curator_email}' where curator_id = ${curator_id}`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    res.send({
+      message: 'Curator data successfully updated',
+    });
+  });
+});
+
+// delete curator data in the CURATOR table
+app.delete('/curator/delete/:id', (req, res) => {
+  let curator_id = req.params.id;
+
+  let qr = `delete from CURATOR where curator_id = '${curator_id}'`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    res.send({
+      message: 'Curator data successfully deleted',
+    });
+  });
+});
+
 // --------------------------------------------------------------
 
 // ----------------------ARTIFACTS------------------------------
