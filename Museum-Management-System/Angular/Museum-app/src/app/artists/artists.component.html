@@ -1,0 +1,22 @@
+<p class="title is-2" style="padding: 1%;">Artists</p>
+
+    <table class="table is-hoverable is-bordered" style="margin: 1%;">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Artist Name</th>
+          <th>Nationality</th>
+          <th>Birth Year</th>
+          <th>Death Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of artistData['data']">
+          <td>{{item.artist_id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.nationality}}</td>
+          <td>{{item.birth_year}}</td>
+          <td>{{item.death_year}}</td>
+        </tr>
+      </tbody>
+    </table>
