@@ -45,25 +45,41 @@
       </div>
 
       <div class="field">
-        <label>Artist ID</label>
-        <div class="control">
-          <input class="input is-small" type="date" formControlName="artist_id">
+        <label class="label">Artist Name</label>
+        <div class="select is-small">
+          <select formControlName="artist_id">
+            <option value="">Select artist...</option>
+            <option *ngFor="let item_artist of artistData['data']" value="item_artist.artist_id">
+              {{ item_artist.name }}
+            </option>
+          </select>
         </div>
-      </div>    
+      </div>      
 
       <div class="field">
-        <label>Category Name</label>
-        <div class="control">
-          <input class="input is-small" type="text">
+        <label class="label">Category Name</label>
+        <div class="select is-small">
+          <select formControlName="category_id">
+            <option value="">Select category...</option>
+            <option *ngFor="let item_category of categoryData['data']" value="item_category.category_id">
+              {{ item_category.name }}
+            </option>
+          </select>
         </div>
       </div>
 
       <div class="field">
-        <label>Curator Name</label>
-        <div class="control">
-          <input class="input is-small" type="text">
+        <label class="label">Curator Name</label>
+        <div class="select is-small">
+          <select formControlName="curator_id">
+            <option value="">Select curator...</option>
+            <option *ngFor="let item_curator of curatorData['data']" value="item_curator.curator_id">
+              {{ item_curator.name }}
+            </option>
+          </select>
         </div>
       </div>
+
       <button class="button is-link is-light" type="submit">Submit</button>
     </form>
   </div>
