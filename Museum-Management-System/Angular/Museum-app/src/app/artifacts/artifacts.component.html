@@ -14,28 +14,28 @@
       <div class="field">
         <label>Artifact Name</label>
         <div class="control">
-          <input class="input is-small" type="text" formControlName="name">
+          <input class="input is-small" type="text" formControlName="artifact_name">
         </div>
       </div>
 
       <div class="field">
         <label>Artifact Description</label>
         <div class="control">
-          <input class="input is-small" type="text" formControlName="description">
+          <input class="input is-small" type="text" formControlName="artifact_description">
         </div>
       </div>
 
       <div class="field">
         <label>Acquisition Date</label>
         <div class="control">
-          <input class="input is-small" type="date" formControlName="date">
+          <input class="input is-small" type="date" formControlName="artifact_acquisition_date">
         </div>
       </div>
 
       <div class="field">
         <label>Artifact Condition</label><br>
         <div class="select is-small">
-          <select formControlName="condition">
+          <select formControlName="artifact_condition">
             <option value="Fair">Fair</option>
             <option value="Good">Good</option>
             <option value="Very Good">Very Good</option>
@@ -49,7 +49,7 @@
         <div class="select is-small">
           <select formControlName="artist_id">
             <option value="">Select artist...</option>
-            <option *ngFor="let item_artist of artistData['data']" value="{{item_artist.artist_id}}">
+            <option *ngFor="let item_artist of artistData['data']" value={{item_artist.artist_id}}>
               {{ item_artist.name }}
             </option>
           </select>

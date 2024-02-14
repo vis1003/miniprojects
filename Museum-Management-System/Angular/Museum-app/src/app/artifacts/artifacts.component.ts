@@ -16,14 +16,16 @@ export class ArtifactsComponent implements OnInit {
   ) { }
 
   addArtifact = new FormGroup({
-    name: new FormControl(''),
-    description: new FormControl(''),
-    date: new FormControl(''),
-    condition: new FormControl(''),
+    artifact_id: new FormControl(''),
+    artifact_name: new FormControl(''),
+    artifact_description: new FormControl(''),
+    artifact_acquisition_date: new FormControl(''),
+    artifact_condition: new FormControl(''),
     artist_id: new FormControl(''),
     category_id: new FormControl(''),
     curator_id: new FormControl('')
   });
+  
   artifactData: any = [];
   artistData: any = [];
   categoryData: any = [];
@@ -87,18 +89,21 @@ export class ArtifactsComponent implements OnInit {
 
   SaveData() {
     const formData = this.addArtifact.value;
-  
+    formData.artifact_id = this.artifactData['data'].length+1
     if (
       formData.artist_id === "" || 
       formData.category_id === "" || 
-      formData.condition === "" || 
+      formData.artifact_condition === "" || 
       formData.curator_id === "" || 
-      formData.date === "" || 
-      formData.description === "" || 
-      formData.name === ""
+      formData.artifact_acquisition_date === "" || 
+      formData.artifact_description === "" || 
+      formData.artifact_name === ""
     ) {
       alert("Please Enter All Data!");
     }
     console.log(formData);
+    this.artifact.saveData(formData,'artifact').subscribe((result)=>{
+      console.log(result);
+    });
   }  
 }
