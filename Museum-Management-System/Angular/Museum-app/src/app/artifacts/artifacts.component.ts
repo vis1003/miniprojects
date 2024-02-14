@@ -86,19 +86,19 @@ export class ArtifactsComponent implements OnInit {
   }
 
   SaveData() {
-    console.log(this.addArtifact.value)
-  }
-
-  fetchData() {
-    const apiUrl = 'http://localhost:3000/artist/fetch'; // Replace this with your API endpoint
-    this.http.get(apiUrl).subscribe(
-      (response: any) => {
-        this.artistData = response; // Assign response to artistData
-        console.log('Data:', this.artistData);
-      },
-      (error) => {
-        console.error('Error fetching data:', error);
-      }
-    );
-  }
+    const formData = this.addArtifact.value;
+  
+    if (
+      formData.artist_id === "" || 
+      formData.category_id === "" || 
+      formData.condition === "" || 
+      formData.curator_id === "" || 
+      formData.date === "" || 
+      formData.description === "" || 
+      formData.name === ""
+    ) {
+      alert("Please Enter All Data!");
+    }
+    console.log(formData);
+  }  
 }
