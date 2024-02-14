@@ -60,10 +60,10 @@ class TranslatorApp:
 
     def create_gui(self):
         # Create dropdown for selecting target language
-        self.languages = LANGUAGES
+        self.languages = {"Kannada": "kn", "Telugu": "te", "Tamil": "ta"}
         self.selected_language = tk.StringVar()
         self.selected_language.set("Kannada")  # Default language
-        self.language_dropdown = ttk.Combobox(self.root, textvariable=self.selected_language, values=list(self.languages.values()))
+        self.language_dropdown = ttk.Combobox(self.root, textvariable=self.selected_language, values=list(self.languages.keys()))
         self.language_dropdown.grid(row=0, column=1, pady=10)
 
         # Create the microphone button
@@ -94,7 +94,7 @@ class TranslatorApp:
         for _ in range(3):
             try:
                 # Get the target language
-                target_language_code = [lang_code for lang_code, lang_name in self.languages.items() if lang_name == self.selected_language.get()][0]
+                target_language = self.languages[self.selected_language.get()]
 
                 # Detect source language
                 detected_language = self.translator.translator.detect(text_to_translate).lang
@@ -102,14 +102,14 @@ class TranslatorApp:
 
                 # Perform translation
                 translated_text = self.translator.translate_text(text_to_translate, source_language=detected_language,
-                                                                 target_language=target_language_code)
+                                                                 target_language=target_language)
 
                 # Display the translated text
                 self.output_label["text"] = f"Translated text: {translated_text}"
                 logging.info(f"Translated text: {translated_text}")
 
                 # Speak the translated text
-                self.translator.speak_text(translated_text, language=target_language_code)
+                self.translator.speak_text(translated_text, language=target_language)
                 break  # Exit loop if translation is successful
             except Exception as e:
                 print(f"Error occurred: {e}")
