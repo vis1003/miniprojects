@@ -1,5 +1,49 @@
 <p class="title is-2" style="padding: 1%;">Exhibitions</p>
 
+<!-- Modal Button -->
+<div style="margin: 1%;">
+  <button class="button is-primary" id="add_btn">Add</button>
+</div>
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content has-background-white py-5 px-5">
+    <h3 class="title mr-3">Add new Exhibition</h3>
+    <!-- Form -->
+    <form [formGroup]="addExhibition" (ngSubmit)="SaveData()">
+
+      <div class="field">
+        <label>Exhibition Name</label>
+        <div class="control">
+          <input class="input is-small" type="text" formControlName="exhibition_name">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>exhibition Start Date</label>
+        <div class="control">
+          <input class="input is-small" type="date" formControlName="exhibition_start_date">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Exhibition End Date</label>
+        <div class="control">
+          <input class="input is-small" type="date" formControlName="exhibition_end_date">
+        </div>
+      </div>    
+      
+      <div class="field">
+        <label>Exhibition Location</label>
+        <div class="control">
+          <input class="input is-small" type="text" formControlName="exhibition_location">
+        </div>
+      </div>
+
+      <button class="button is-link is-light" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
   <table class="table is-hoverable is-bordered" style="margin: 1%;">
       <thead>
         <tr>
