@@ -1,5 +1,35 @@
 <p class="title is-2" style="padding: 1%;">Curators</p>
 
+<!-- Modal Button -->
+<div style="margin: 1%;">
+  <button class="button is-primary" id="add_btn">Add</button>
+</div>
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content has-background-white py-5 px-5">
+    <h3 class="title mr-3">Add new Curator</h3>
+    <!-- Form -->
+    <form [formGroup]="addCurator" (ngSubmit)="SaveData()">
+
+      <div class="field">
+        <label>Curator Name</label>
+        <div class="control">
+          <input class="input is-small" type="text" formControlName="curator_name">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Curator Email</label>
+        <div class="control">
+          <input class="input is-small" type="text" formControlName="curator_email">
+        </div>
+      </div>   
+
+      <button class="button is-link is-light" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
   <table class="table is-hoverable is-bordered" style="margin: 1%;">
       <thead>
         <tr>
