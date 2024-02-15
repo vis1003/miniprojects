@@ -12,7 +12,7 @@ export class ArtifactsComponent implements OnInit {
 
   constructor(
     private artifact: AllDataService,
-    private http: HttpClient // Inject HttpClient here
+    private http: HttpClient
   ) { }
 
   addArtifact = new FormGroup({

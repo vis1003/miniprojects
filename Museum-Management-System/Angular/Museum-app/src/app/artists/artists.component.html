@@ -1,5 +1,49 @@
 <p class="title is-2" style="padding: 1%;">Artists</p>
 
+<!-- Modal Button -->
+<div style="margin: 1%;">
+  <button class="button is-primary" id="add_btn">Add</button>
+</div>
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content has-background-white py-5 px-5">
+    <h3 class="title mr-3">Add new Artist</h3>
+    <!-- Form -->
+    <form [formGroup]="addArtist" (ngSubmit)="SaveData()">
+
+      <div class="field">
+        <label>Artist Name</label>
+        <div class="control">
+          <input class="input is-small" type="text" formControlName="artist_name">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Artist Nationality</label>
+        <div class="control">
+          <input class="input is-small" type="text" formControlName="artist_nationality">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Artist Birth Year</label>
+        <div class="control">
+          <input class="input is-small" type="date" formControlName="artist_birth_year">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Artist Death Year</label>
+        <div class="control">
+          <input class="input is-small" type="date" formControlName="artist_death_year">
+        </div>
+      </div>    
+
+      <button class="button is-link is-light" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
     <table class="table is-hoverable is-bordered" style="margin: 1%;">
       <thead>
         <tr>
