@@ -1,5 +1,35 @@
 <p class="title is-2" style="padding: 1%;">Categories</p>
 
+<!-- Modal Button -->
+<div style="margin: 1%;">
+  <button class="button is-primary" id="add_btn">Add</button>
+</div>
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content has-background-white py-5 px-5">
+    <h3 class="title mr-3">Add new Category</h3>
+    <!-- Form -->
+    <form [formGroup]="addCategory" (ngSubmit)="SaveData()">
+
+      <div class="field">
+        <label>Category Name</label>
+        <div class="control">
+          <input class="input is-small" type="text" formControlName="category_name">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Category Description</label>
+        <div class="control">
+          <input class="input is-small" type="text" formControlName="category_description">
+        </div>
+      </div> 
+
+      <button class="button is-link is-light" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
   <table class="table is-hoverable is-bordered" style="margin: 1%;">
       <thead>
         <tr>

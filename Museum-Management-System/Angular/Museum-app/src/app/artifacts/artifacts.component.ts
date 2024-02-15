@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AllDataService } from '../services/all-data.service';
 import { FormGroup, FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http'; // Import HttpClient
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-artifacts',
