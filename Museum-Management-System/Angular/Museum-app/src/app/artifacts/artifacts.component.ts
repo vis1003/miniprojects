@@ -107,4 +107,12 @@ export class ArtifactsComponent implements OnInit {
     });
     window.location.reload();
   }  
+
+  deleteData(artifact_id : any){
+    console.log(artifact_id);
+    this.artifact.deleteData(artifact_id,'artifact').subscribe((result)=>{
+      console.log(result);
+    });
+    window.location.reload();
+  }
 }

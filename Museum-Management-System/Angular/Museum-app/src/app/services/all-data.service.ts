@@ -14,4 +14,7 @@ export class AllDataService {
     console.log(data);
     return this.http.post(this.url+entity+'/add',data)
   }
+  deleteData(id: any, entity: string){
+    return this.http.delete(this.url+entity+'/delete/'+id)
+  }
 }
