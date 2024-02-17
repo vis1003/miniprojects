@@ -60,6 +60,7 @@ SaveData() {
   this.category.saveData(formData,'category').subscribe((result)=>{
     console.log(result);
   });
+  window.location.reload();
 }  
 }
 

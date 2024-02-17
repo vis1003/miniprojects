@@ -105,5 +105,6 @@ export class ArtifactsComponent implements OnInit {
     this.artifact.saveData(formData,'artifact').subscribe((result)=>{
       console.log(result);
     });
+    window.location.reload();
   }  
 }

@@ -64,5 +64,6 @@ export class ExhibitionsComponent implements OnInit{
     this.exhibition.saveData(formData,'exhibition').subscribe((result)=>{
       console.log(result);
     });
+    window.location.reload();
   }  
 }

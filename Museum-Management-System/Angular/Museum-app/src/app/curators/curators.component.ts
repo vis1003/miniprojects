@@ -60,5 +60,6 @@ SaveData() {
   this.curator.saveData(formData,'curator').subscribe((result)=>{
     console.log(result);
   });
+  window.location.reload();
 }  
 }

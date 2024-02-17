@@ -64,6 +64,7 @@ export class ArtistsComponent implements OnInit{
     this.artist.saveData(formData,'artist').subscribe((result)=>{
       console.log(result);
     });
+    window.location.reload();
   }  
 }
 
