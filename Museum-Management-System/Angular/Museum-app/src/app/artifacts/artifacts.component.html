@@ -113,16 +113,97 @@
       <td>{{item.curator_name}}</td>
       <td>
         <div class="buttons">
-          <a class="button is-small" (click)="deleteData(item.artifact_id)">
+          <button class="button is-small" (click)="deleteData(item.artifact_id)">
             <span class="icon is-small">
               <i class="fas fa-trash"></i>
             </span>
-          </a>
-          <a class="button is-small">
+          </button>
+          <button class="button is-small" (click)="editDataBtn(item.artifact_id)">
             <span class="icon is-small">
               <i class="fas fa-pencil-alt"></i>
             </span>
-          </a>
+          </button>
+          <!-- Modal for Edit -->
+          <div class="modal" id="modal-edit">
+            <div class="modal-background"  id="edit_background"></div>
+            <div class="modal-content has-background-white py-5 px-5">
+              <h3 class="title mr-3">Edit Artifact</h3>
+              <!-- Form -->
+              <form [formGroup]="editArtifact" (ngSubmit)="editData(item.artifact_id)">
+          
+                <div class="field">
+                  <label>Artifact Name</label>
+                  <div class="control">
+                    <input class="input is-small" type="text" formControlName="artifact_name">
+                  </div>
+                </div>
+          
+                <div class="field">
+                  <label>Artifact Description</label>
+                  <div class="control">
+                    <input class="input is-small" type="text" formControlName="artifact_description">
+                  </div>
+                </div>
+          
+                <div class="field">
+                  <label>Acquisition Date</label>
+                  <div class="control">
+                    <input class="input is-small" type="date" formControlName="artifact_acquisition_date">
+                  </div>
+                </div>
+          
+                <div class="field">
+                  <label>Artifact Condition</label><br>
+                  <div class="select is-small">
+                    <select formControlName="artifact_condition">
+                      <option value="Fair">Fair</option>
+                      <option value="Good">Good</option>
+                      <option value="Very Good">Very Good</option>
+                      <option value="Excellent">Excellent</option>
+                    </select>
+                  </div>
+                </div>
+          
+                <div class="field">
+                  <label>Artist Name</label><br>
+                  <div class="select is-small">
+                    <select formControlName="artist_id">
+                      <option value="">Select artist...</option>
+                      <option *ngFor="let item_artist of artistData['data']" value={{item_artist.artist_id}}>
+                        {{ item_artist.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>      
+          
+                <div class="field">
+                  <label>Category Name</label><br>
+                  <div class="select is-small">
+                    <select formControlName="category_id">
+                      <option value="">Select category...</option>
+                      <option *ngFor="let item_category of categoryData['data']" value="{{item_category.category_id}}">
+                        {{ item_category.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+          
+                <div class="field">
+                  <label>Curator Name</label><br>
+                  <div class="select is-small">
+                    <select formControlName="curator_id">
+                      <option value="">Select curator...</option>
+                      <option *ngFor="let item_curator of curatorData['data']" value="{{item_curator.curator_id}}">
+                        {{ item_curator.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+          
+                <button class="button is-link is-light" type="submit">Submit</button>
+              </form>
+            </div>
+          </div>
         </div>
       </td>
     </tr>

@@ -25,6 +25,17 @@ export class ArtifactsComponent implements OnInit {
     category_id: new FormControl(''),
     curator_id: new FormControl('')
   });
+
+  editArtifact = new FormGroup({
+    artifact_id: new FormControl(''),
+    artifact_name: new FormControl(''),
+    artifact_description: new FormControl(''),
+    artifact_acquisition_date: new FormControl(''),
+    artifact_condition: new FormControl(''),
+    artist_id: new FormControl(''),
+    category_id: new FormControl(''),
+    curator_id: new FormControl('')
+  });
   
   artifactData: any = [];
   artistData: any = [];
@@ -85,7 +96,7 @@ export class ArtifactsComponent implements OnInit {
         modal.classList.remove('is-active');
       })
     }
-  }
+    }
 
   SaveData() {
     const formData = this.addArtifact.value;
@@ -110,9 +121,27 @@ export class ArtifactsComponent implements OnInit {
 
   deleteData(artifact_id : any){
     console.log(artifact_id);
-    this.artifact.deleteData(artifact_id,'artifact').subscribe((result)=>{
-      console.log(result);
-    });
-    window.location.reload();
+    var check = confirm("Are you sure you want to delete Artifact "+artifact_id+"?")
+    if(check){
+      this.artifact.deleteData(artifact_id,'artifact').subscribe((result)=>{
+        console.log(result);
+      });
+      window.location.reload();
+    }
+  }
+
+  editDataBtn(artifact_id : any){
+    const modal = document.querySelector('#modal-edit');
+    const modalBg = document.querySelector('#edit_background');
+    if (modal) {
+      modal.classList.add('is-active');
+      modalBg?.addEventListener('click', () => {
+        modal.classList.remove('is-active');
+      })
+    }
+  }
+
+  editData(artifact_id : any){
+    console.log(artifact_id);
   }
 }
