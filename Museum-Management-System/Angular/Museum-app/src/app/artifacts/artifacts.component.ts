@@ -41,7 +41,6 @@ export class ArtifactsComponent implements OnInit {
   artistData: any = [];
   categoryData: any = [];
   curatorData: any = [];
-  updateArtifact: any = [];
 
   ngOnInit(): void {
     this.artifact.getAllData('artifact').subscribe((allData) => {
@@ -134,22 +133,47 @@ export class ArtifactsComponent implements OnInit {
   editDataBtn(artifact_id : any){
     console.log(artifact_id);
     this.artifact.getDataByID('artifact',artifact_id).subscribe((result:any)=>{
-      console.log(result);
 
+      // console.log(this.artistData['data'][artist_id].name)
       // putting default values to form fields
       const formData = this.editArtifact.value;
+      console.log(result['data'])
+      
+      var artist_id = null;
+      var category_id = null;
+      var curator_id = null;
 
+      for (let artist of this.artistData['data']) {
+        if (artist.name === result['data'][0].artist_name) {
+          artist_id = artist.artist_id;
+          break;
+        }
+      }
+      for (let curator of this.curatorData['data']) {
+        if (curator.name === result['data'][0].curator_name) {
+          curator_id = curator.curator_id;
+          break;
+        }
+      }
+      for (let category of this.categoryData['data']) {
+        if (category.name === result['data'][0].category_name) {
+          category_id = category.category_id;
+          break;
+        }
+      }
+      
       this.editArtifact = new FormGroup({
         artifact_id: new FormControl(result['data'][0].artifact_id),
         artifact_name: new FormControl(result['data'][0].artifact_name),
-        artifact_description: new FormControl(result['data'][0].artifact_name),
-        artifact_acquisition_date: new FormControl(result['data'][0].artifact_name),
-        artifact_condition: new FormControl(result['data'][0].artifact_name),
-        artist_id: new FormControl(result['data'][0].artifact_name),
-        category_id: new FormControl(result['data'][0].artifact_name),
-        curator_id: new FormControl(result['data'][0].artifact_name)
+        artifact_description: new FormControl(result['data'][0].artifact_description),
+        artifact_acquisition_date: new FormControl(result['data'][0].acquisition_date),
+        artifact_condition: new FormControl(result['data'][0].artifact_condition),
+        artist_id: new FormControl(artist_id),
+        category_id: new FormControl(category_id),
+        curator_id: new FormControl(curator_id)
       });
     });
+
     const modal = document.querySelector('#modal-edit');
     const modalBg = document.querySelector('#edit_background');
     if (modal) {
