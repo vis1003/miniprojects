@@ -17,4 +17,7 @@ export class AllDataService {
   deleteData(id: any, entity: string){
     return this.http.delete(this.url+entity+'/delete/'+id)
   }
+  getDataByID(entity: string, id: any){
+    return this.http.get(this.url+entity+'/fetch/'+id)
+  }
 }

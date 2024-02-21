@@ -41,6 +41,7 @@ export class ArtifactsComponent implements OnInit {
   artistData: any = [];
   categoryData: any = [];
   curatorData: any = [];
+  updateArtifact: any = [];
 
   ngOnInit(): void {
     this.artifact.getAllData('artifact').subscribe((allData) => {
@@ -131,6 +132,24 @@ export class ArtifactsComponent implements OnInit {
   }
 
   editDataBtn(artifact_id : any){
+    console.log(artifact_id);
+    this.artifact.getDataByID('artifact',artifact_id).subscribe((result:any)=>{
+      console.log(result);
+
+      // putting default values to form fields
+      const formData = this.editArtifact.value;
+
+      this.editArtifact = new FormGroup({
+        artifact_id: new FormControl(result['data'][0].artifact_id),
+        artifact_name: new FormControl(result['data'][0].artifact_name),
+        artifact_description: new FormControl(result['data'][0].artifact_name),
+        artifact_acquisition_date: new FormControl(result['data'][0].artifact_name),
+        artifact_condition: new FormControl(result['data'][0].artifact_name),
+        artist_id: new FormControl(result['data'][0].artifact_name),
+        category_id: new FormControl(result['data'][0].artifact_name),
+        curator_id: new FormControl(result['data'][0].artifact_name)
+      });
+    });
     const modal = document.querySelector('#modal-edit');
     const modalBg = document.querySelector('#edit_background');
     if (modal) {
