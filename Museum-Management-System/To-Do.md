@@ -2,19 +2,22 @@
 
 #### Back-end:
 - [ ] Add 2 more categories
+- [ ] Create view for artifact exhibition
 
 #### API:
-- [ ] Create ADD API
-- [ ] Create UPDATE API
-- [ ] Create DELETE API
+- [x] Create ADD API
+- [x] Create UPDATE API
+- [x] Create DELETE API
+- [ ] Create API for Artifact exhibition
 
 #### Front-end:
 - [ ] Display artifacts under categories
-- [ ] Finalize design for Filter panel
-- [ ] Finalize components in Filter
-- [ ] Create Form to input ADD data
-- [ ] Create Edit option
-- [ ] Create Delete option
+- [x] Create Form to input ADD data
+- [x] Create Edit option
+- [x] Create Delete option
+- [ ] Add edit to all forms
+- [ ] Add delete to all forms
+- [ ] Make artifact exhibition frontend
 
 # Resources
 

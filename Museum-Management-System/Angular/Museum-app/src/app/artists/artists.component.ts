@@ -23,6 +23,14 @@ export class ArtistsComponent implements OnInit{
     artist_death_year: new FormControl('')
   });
 
+  editArtist = new FormGroup({
+    artist_id: new FormControl(''),
+    artist_name: new FormControl(''),
+    artist_nationality: new FormControl(''),
+    artist_birth_year: new FormControl(''),
+    artist_death_year: new FormControl('')
+  });
+
   artistData: any=[];
 
   ngOnInit(): void {
@@ -65,6 +73,63 @@ export class ArtistsComponent implements OnInit{
       console.log(result);
     });
     window.location.reload();
-  }  
+  }
+  deleteData(artist_id : any){
+    console.log(artist_id);
+    var check = confirm("Are you sure you want to delete Artist "+artist_id+"?")
+    if(check){
+      this.artist.deleteData(artist_id,'artist').subscribe((result)=>{
+        console.log(result);
+      });
+      window.location.reload();
+    }
+  }
+
+  editDataBtn(artist_id : any){
+    console.log(artist_id);
+    this.artist.getDataByID('artist',artist_id).subscribe((result:any)=>{
+
+      const formData = this.editArtist.value;
+      console.log(result['data'])
+      
+      this.editArtist = new FormGroup({
+        artist_id: new FormControl(result['data'][0].artist_id),
+        artist_name: new FormControl(result['data'][0].name),
+        artist_nationality: new FormControl(result['data'][0].nationality),
+        artist_birth_year: new FormControl(result['data'][0].birth_year),
+        artist_death_year: new FormControl(result['data'][0].death_year)
+      });
+    });
+
+    const modal = document.querySelector('#modal-edit');
+    const modalBg = document.querySelector('#edit_background');
+    if (modal) {
+      modal.classList.add('is-active');
+      modalBg?.addEventListener('click', () => {
+        modal.classList.remove('is-active');
+      })
+    }
+  }
+
+  editData(artist_id : any){
+    console.log(this.editArtist.value);
+    
+    const formData = this.editArtist.value;
+    formData.artist_id = this.artistData['data'].length+1
+    if (
+      formData.artist_id === "" || 
+      formData.artist_name === "" || 
+      formData.artist_nationality === "" || 
+      formData.artist_birth_year === "" || 
+      formData.artist_death_year === ""
+    ) {
+      alert("Please Enter All Data!");
+    }
+    console.log(formData);
+    this.artist.updateData(formData,'artist',artist_id).subscribe((result)=>{
+      console.log(result);
+    });
+    window.location.reload();
+  }
 }
 
