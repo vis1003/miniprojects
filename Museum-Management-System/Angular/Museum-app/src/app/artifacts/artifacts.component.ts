@@ -134,8 +134,6 @@ export class ArtifactsComponent implements OnInit {
     console.log(artifact_id);
     this.artifact.getDataByID('artifact',artifact_id).subscribe((result:any)=>{
 
-      // console.log(this.artistData['data'][artist_id].name)
-      // putting default values to form fields
       const formData = this.editArtifact.value;
       console.log(result['data'])
       
@@ -185,6 +183,25 @@ export class ArtifactsComponent implements OnInit {
   }
 
   editData(artifact_id : any){
-    console.log(artifact_id);
+    console.log(this.editArtifact.value);
+    
+    const formData = this.editArtifact.value;
+    formData.artifact_id = this.artifactData['data'].length+1
+    if (
+      formData.artist_id === "" || 
+      formData.category_id === "" || 
+      formData.artifact_condition === "" || 
+      formData.curator_id === "" || 
+      formData.artifact_acquisition_date === "" || 
+      formData.artifact_description === "" || 
+      formData.artifact_name === ""
+    ) {
+      alert("Please Enter All Data!");
+    }
+    console.log(formData);
+    this.artifact.updateData(formData,'artifact',artifact_id).subscribe((result)=>{
+      console.log(result);
+    });
+    window.location.reload();
   }
 }

@@ -17,7 +17,10 @@ export class AllDataService {
   deleteData(id: any, entity: string){
     return this.http.delete(this.url+entity+'/delete/'+id)
   }
-  getDataByID(entity: string, id: any){
+  getDataByID(entity: string, id: number){
     return this.http.get(this.url+entity+'/fetch/'+id)
+  }
+  updateData(data: any, entity: string, id: number) {
+    return this.http.put(this.url+entity+'/update/'+id,data)
   }
 }

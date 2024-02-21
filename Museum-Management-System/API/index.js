@@ -456,7 +456,7 @@ app.put('/artifact/update/:id', (req, res) => {
   let category_id = req.body.category_id;
   let curator_id = req.body.curator_id;
 
-  let qr = `update ARTIFACT set name = '${artifact_name}', description = '${artifact_description}', description = '${artifact_acquisition_date}', description = '${artifact_condition}', artist_id = ${artist_id}, category_id = ${category_id}, curator_id = ${curator_id} where artifact_id = ${artifact_id}`;
+  let qr = `update ARTIFACT set name = '${artifact_name}', description = '${artifact_description}', acquisition_date = '${artifact_acquisition_date}', artifact_condition = '${artifact_condition}', artist_id = ${artist_id}, category_id = ${category_id}, curator_id = ${curator_id} where artifact_id = ${artifact_id}`;
 
   db.query(qr, (err, result) => {
     if (err) {
