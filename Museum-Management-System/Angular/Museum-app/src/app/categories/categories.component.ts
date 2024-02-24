@@ -21,6 +21,14 @@ export class CategoriesComponent implements OnInit{
     category_description: new FormControl('')
   });
 
+  editCategory = new FormGroup({
+    category_id: new FormControl(''),
+    category_name: new FormControl(''),
+    category_description: new FormControl('')
+  });
+
+  editCategoryId: any = null;
+
   categoryData: any=[];
 
   ngOnInit(): void {
@@ -61,7 +69,63 @@ SaveData() {
     console.log(result);
   });
   window.location.reload();
-}  
+  }  
+  
+  deleteData(category_id : any){
+    console.log(category_id);
+    var check = confirm("Are you sure you want to delete Category "+category_id+"?")
+    if(check){
+      this.category.deleteData(category_id,'category').subscribe((result)=>{
+        console.log(result);
+      });
+      window.location.reload();
+    }
+  }
+
+  editDataBtn(category_id : any){
+    console.log(category_id);
+    this.editCategoryId = category_id;
+    this.category.getDataByID('category',category_id).subscribe((result:any)=>{
+
+      const formData = this.editCategory.value;
+      console.log(result['data'])
+      
+      this.editCategory = new FormGroup({
+        category_id: new FormControl(result['data'][0].category_id),
+        category_name: new FormControl(result['data'][0].name),
+        category_description: new FormControl(result['data'][0].description)
+      });
+    });
+
+    const modal = document.querySelector('#modal-edit');
+    const modalBg = document.querySelector('#edit_background');
+    if (modal) {
+      modal.classList.add('is-active');
+      modalBg?.addEventListener('click', () => {
+        modal.classList.remove('is-active');
+      })
+    }
+  }
+
+  editData() {
+    let category_id = this.editCategoryId;
+    console.log(this.editCategory.value);
+    
+    const formData = this.editCategory.value;
+    formData.category_id = this.categoryData['data'].length+1
+    if (
+      formData.category_id === "" || 
+    formData.category_name === "" || 
+    formData.category_description === ""
+    ) {
+      alert("Please Enter All Data!");
+    }
+    console.log(formData);
+    this.category.updateData(formData,'category',category_id).subscribe((result)=>{
+      console.log(result);
+    });
+    window.location.reload();
+  }
 }
 
 

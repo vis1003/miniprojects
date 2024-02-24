@@ -76,6 +76,7 @@ export class ArtistsComponent implements OnInit{
     });
     window.location.reload();
   }
+  
   deleteData(artist_id : any){
     console.log(artist_id);
     var check = confirm("Are you sure you want to delete Artist "+artist_id+"?")
