@@ -31,6 +31,8 @@ export class ArtistsComponent implements OnInit{
     artist_death_year: new FormControl('')
   });
 
+  editArtistId: any = null;
+
   artistData: any=[];
 
   ngOnInit(): void {
@@ -87,6 +89,7 @@ export class ArtistsComponent implements OnInit{
 
   editDataBtn(artist_id : any){
     console.log(artist_id);
+    this.editArtistId = artist_id;
     this.artist.getDataByID('artist',artist_id).subscribe((result:any)=>{
 
       const formData = this.editArtist.value;
@@ -111,7 +114,8 @@ export class ArtistsComponent implements OnInit{
     }
   }
 
-  editData(artist_id : any){
+  editData() {
+    let artist_id = this.editArtistId;
     console.log(this.editArtist.value);
     
     const formData = this.editArtist.value;
