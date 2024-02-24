@@ -6,6 +6,7 @@ import { ArtistsComponent } from './artists/artists.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CuratorsComponent } from './curators/curators.component';
 import { ExhibitionsComponent } from './exhibitions/exhibitions.component';
+import { ArtifactExhibitionComponent } from './artifact-exhibition/artifact-exhibition.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'exhibitions',
     component: ExhibitionsComponent
+  },
+  {
+    path: 'artifact-exhibition',
+    component: ArtifactExhibitionComponent
   }
 ];
 

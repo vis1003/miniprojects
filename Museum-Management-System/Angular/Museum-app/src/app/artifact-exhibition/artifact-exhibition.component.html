@@ -1,0 +1,15 @@
+<div *ngFor="let table of tableList" style="text-align: center;">
+    
+    <table class="table is-hoverable is-bordered" style="margin: 1%;">
+        <tr>
+            <th>Artifact Name</th>
+            <th>Description</th>
+            <th>Category Name</th>
+        </tr>
+        <tr *ngFor="let item of table['data'][0]">
+            <td>{{item.artifact_name}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.category_name}}</td>
+        </tr>
+    </table>
+</div>

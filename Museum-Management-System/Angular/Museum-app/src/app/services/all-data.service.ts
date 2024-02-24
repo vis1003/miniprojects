@@ -23,4 +23,7 @@ export class AllDataService {
   updateData(data: any, entity: string, id: number) {
     return this.http.put(this.url+entity+'/update/'+id,data)
   }
+  getExhibitionData(id: number){
+    return this.http.get(this.url+'artifact-exhibition/fetch/'+id)
+  }
 }

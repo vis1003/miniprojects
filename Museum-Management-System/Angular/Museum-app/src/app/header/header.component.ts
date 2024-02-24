@@ -19,6 +19,7 @@ import { Component } from '@angular/core';
         <a class="navbar-item" routerLink="/curators">Curators</a>
         <a class="navbar-item" routerLink="/categories">Categories</a>
         <a class="navbar-item" routerLink="/exhibitions">Exhibitions</a>
+        <a class="navbar-item" routerLink="/artifact-exhibition">Artifact Exhibition</a>
       </div>
     </div>
   </div>

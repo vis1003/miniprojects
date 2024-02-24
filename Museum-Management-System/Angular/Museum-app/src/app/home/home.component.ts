@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
           MUSEUM MANAGEMENT SYSTEM
         </h1>
         <h2 class="subtitle">
-          An application to manage Musuem Administration
+          An application to manage Museum Administration
         </h2>
       </div>
     </div>
