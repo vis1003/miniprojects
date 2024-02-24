@@ -605,28 +605,34 @@ app.delete('/exhibition/delete/:id', (req, res) => {
   });
 });
 // --------------------------------------------------------------
-// ----------------------EXHIBITION------------------------------
+// --------------------ARTIFACT-EXHIBITION-----------------------
 // call stored procedure and fetch the artifacts under an exhibition
 app.get('/artifact-exhibition/fetch/:id', (req, res) => {
 
   let exhibtionId = req.params.id;
-  let qr = `CALL GetArtifactsByExhibition(${exhibtionId});`;
+  let qr1 = `CALL GetArtifactsByExhibition(${exhibtionId})`;
+  let qr2 = `SELECT name FROM EXHIBITION WHERE exhibition_id = ${exhibtionId}`;
 
-  db.query(qr, (err, result) => {
-    if (err) {
-      console.log(err);
+  db.query(qr1, (err1, result1) => {
+    if (err1) {
+      console.log(err1);
       res.status(500).send('Internal server error');
       return;
     }
-    if (result.length > 0) {
+
+    db.query(qr2, (err2, result2) => {
+      if (err2) {
+        console.log(err2);
+        res.status(500).send('Internal server error');
+        return;
+      }
+
       res.send({
         message: 'Exhibition data retrieved successfully',
-        data: result
+        exhibitionName: result2[0] ? result2[0].name : null,
+        data: result1[0]
       });
-    }
-    else {
-      res.status(404).send('Exhibition not found');
-    }
+    });
   });
 });
 
