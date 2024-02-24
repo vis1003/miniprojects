@@ -186,7 +186,7 @@ export class ArtifactsComponent implements OnInit {
     console.log(this.editArtifact.value);
     
     const formData = this.editArtifact.value;
-    formData.artifact_id = artifact_id
+    // formData.artifact_id = artifact_id
     if (
       formData.artist_id === "" || 
       formData.category_id === "" || 
@@ -199,9 +199,10 @@ export class ArtifactsComponent implements OnInit {
       alert("Please Enter All Data!");
     }
     console.log(formData);
+    console.log("artifact id:"+artifact_id)
     this.artifact.updateData(formData,'artifact',artifact_id).subscribe((result)=>{
       console.log(result);
     });
-    window.location.reload();
+    //window.location.reload();
   }
 }
