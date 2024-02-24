@@ -44,7 +44,7 @@ create table ARTIFACT_EXHIBITION(
     artifact_id int,
     exhibition_id int,
     primary key(artifact_id,exhibition_id),
-    foreign key (artifact_id) references ARTIFACT(artifact_id),
+    foreign key (artifact_id) references ARTIFACT(artifact_id) on delete cascade,
     foreign key (exhibition_id) references EXHIBITION(exhibition_id) on delete cascade
 );
 
@@ -128,3 +128,33 @@ SELECT * FROM CURATOR;
 SELECT * FROM ARTIFACT;
 SELECT * FROM EXHIBITION;
 SELECT * FROM ARTIFACT_EXHIBITION;
+
+-- View
+
+CREATE VIEW Exhibition_Artifacts AS
+SELECT E.exhibition_id, E.name AS exhibition_name, A.artifact_id, A.name AS artifact_name, A.description AS artifact_description
+FROM EXHIBITION E
+JOIN ARTIFACT_EXHIBITION AE ON E.exhibition_id = AE.exhibition_id
+JOIN ARTIFACT A ON AE.artifact_id = A.artifact_id;
+
+-- Stored Procedure
+
+DELIMITER //
+
+CREATE PROCEDURE GetArtifactsByExhibition(
+  IN exhibition_id INT
+)
+BEGIN
+  SELECT a.name AS artifact_name, a.description, c.name AS category_name
+  FROM ARTIFACT a
+  INNER JOIN ARTIFACT_EXHIBITION ae ON ae.artifact_id = a.artifact_id
+  INNER JOIN CATEGORY c ON c.category_id = a.category_id
+  WHERE ae.exhibition_id = exhibition_id;
+END //
+
+DELIMITER ;
+
+CALL GetArtifactsByExhibition(1);
+
+DROP PROCEDURE IF EXISTS CreateExhibitionTables;
+
