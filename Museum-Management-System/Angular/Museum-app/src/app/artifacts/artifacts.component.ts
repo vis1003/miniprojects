@@ -37,6 +37,8 @@ export class ArtifactsComponent implements OnInit {
     curator_id: new FormControl('')
   });
   
+  editArtifactId: any = null;
+
   artifactData: any = [];
   artistData: any = [];
   categoryData: any = [];
@@ -132,6 +134,7 @@ export class ArtifactsComponent implements OnInit {
 
   editDataBtn(artifact_id : any){
     console.log(artifact_id);
+    this.editArtifactId = artifact_id;
     this.artifact.getDataByID('artifact',artifact_id).subscribe((result:any)=>{
 
       const formData = this.editArtifact.value;
@@ -182,7 +185,8 @@ export class ArtifactsComponent implements OnInit {
     }
   }
 
-  editData(artifact_id : any){
+  editData() {
+    let artifact_id = this.editArtifactId;
     console.log(this.editArtifact.value);
     
     const formData = this.editArtifact.value;
@@ -203,6 +207,6 @@ export class ArtifactsComponent implements OnInit {
     this.artifact.updateData(formData,'artifact',artifact_id).subscribe((result)=>{
       console.log(result);
     });
-    //window.location.reload();
+    window.location.reload();
   }
 }

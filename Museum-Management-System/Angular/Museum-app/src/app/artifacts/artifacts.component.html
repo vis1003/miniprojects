@@ -56,7 +56,7 @@
             </option>
           </select>
         </div>
-      </div>      
+      </div>
 
       <div class="field">
         <label>Category Name</label><br>
@@ -125,33 +125,33 @@
           </button>
           <!-- Modal for Edit -->
           <div class="modal" id="modal-edit">
-            <div class="modal-background"  id="edit_background"></div>
+            <div class="modal-background" id="edit_background"></div>
             <div class="modal-content has-background-white py-5 px-5">
               <h3 class="title mr-3">Edit Artifact</h3>
               <!-- Form -->
-              <form [formGroup]="editArtifact" (ngSubmit)="editData(item.artifact_id)">
-          
+              <form [formGroup]="editArtifact" (ngSubmit)="editData()">
+
                 <div class="field">
                   <label>Artifact Name</label>
                   <div class="control">
                     <input class="input is-small" type="text" formControlName="artifact_name">
                   </div>
                 </div>
-          
+
                 <div class="field">
                   <label>Artifact Description</label>
                   <div class="control">
                     <input class="input is-small" type="text" formControlName="artifact_description">
                   </div>
                 </div>
-          
+
                 <div class="field">
                   <label>Acquisition Date</label>
                   <div class="control">
                     <input class="input is-small" type="date" formControlName="artifact_acquisition_date">
                   </div>
                 </div>
-          
+
                 <div class="field">
                   <label>Artifact Condition</label><br>
                   <div class="select is-small">
@@ -163,7 +163,7 @@
                     </select>
                   </div>
                 </div>
-          
+
                 <div class="field">
                   <label>Artist Name</label><br>
                   <div class="select is-small">
@@ -174,7 +174,7 @@
                       </option>
                     </select>
                   </div>
-                </div>      
+                </div>
 
                 <div class="field">
                   <label>Category Name</label><br>
@@ -187,7 +187,7 @@
                     </select>
                   </div>
                 </div>
-          
+
                 <div class="field">
                   <label>Curator Name</label><br>
                   <div class="select is-small">
@@ -199,7 +199,7 @@
                     </select>
                   </div>
                 </div>
-          
+
                 <button class="button is-link is-light" type="submit">Submit</button>
               </form>
             </div>
