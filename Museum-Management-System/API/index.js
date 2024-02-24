@@ -605,7 +605,32 @@ app.delete('/exhibition/delete/:id', (req, res) => {
   });
 });
 // --------------------------------------------------------------
+// ----------------------EXHIBITION------------------------------
+// call stored procedure and fetch the artifacts under an exhibition
+app.get('/artifact-exhibition/fetch/:id', (req, res) => {
 
+  let exhibtionId = req.params.id;
+  let qr = `CALL GetArtifactsByExhibition(${exhibtionId});`;
+
+  db.query(qr, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+      return;
+    }
+    if (result.length > 0) {
+      res.send({
+        message: 'Exhibition data retrieved successfully',
+        data: result
+      });
+    }
+    else {
+      res.status(404).send('Exhibition not found');
+    }
+  });
+});
+
+// --------------------------------------------------------------
 // Listen on port 3000
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
