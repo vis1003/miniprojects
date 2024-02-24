@@ -186,7 +186,7 @@ export class ArtifactsComponent implements OnInit {
     console.log(this.editArtifact.value);
     
     const formData = this.editArtifact.value;
-    formData.artifact_id = this.artifactData['data'].length+1
+    formData.artifact_id = artifact_id
     if (
       formData.artist_id === "" || 
       formData.category_id === "" || 
