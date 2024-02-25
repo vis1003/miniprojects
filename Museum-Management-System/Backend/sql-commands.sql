@@ -158,3 +158,37 @@ CALL GetArtifactsByExhibition(1);
 
 DROP PROCEDURE IF EXISTS CreateExhibitionTables;
 
+-- Triggers
+
+-- trigger for artist birth year to be before death year
+
+DELIMITER //
+
+CREATE TRIGGER ensure_valid_artist_years_trigger
+BEFORE INSERT ON ARTIST
+FOR EACH ROW
+BEGIN
+    IF NEW.birth_year >= NEW.death_year THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Artist birth year must be before the death year';
+    END IF;
+END //
+
+DELIMITER ;
+
+
+-- trigger for exhibition start date to be before exhibition end date
+
+DELIMITER //
+
+CREATE TRIGGER ensure_valid_exhibition_dates_trigger
+BEFORE INSERT ON EXHIBITION
+FOR EACH ROW
+BEGIN
+    IF NEW.start_date >= NEW.end_date THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Exhibition start date must be before the end date';
+    END IF;
+END //
+
+DELIMITER ;
