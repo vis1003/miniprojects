@@ -131,11 +131,15 @@ SELECT * FROM ARTIFACT_EXHIBITION;
 
 -- View
 
-CREATE VIEW Exhibition_Artifacts AS
-SELECT E.exhibition_id, E.name AS exhibition_name, A.artifact_id, A.name AS artifact_name, A.description AS artifact_description
-FROM EXHIBITION E
-JOIN ARTIFACT_EXHIBITION AE ON E.exhibition_id = AE.exhibition_id
-JOIN ARTIFACT A ON AE.artifact_id = A.artifact_id;
+DROP VIEW IF EXISTS ArtifactsPerCategory;
+
+CREATE VIEW ArtifactsPerCategory AS
+SELECT c.category_id, c.name AS category_name, COUNT(*) AS num_artifacts
+FROM ARTIFACT a
+JOIN CATEGORY c ON a.category_id = c.category_id
+GROUP BY c.category_id, c.name;
+
+SELECT * FROM ArtifactsPerCategory;
 
 -- Stored Procedure
 

@@ -625,6 +625,7 @@ app.delete('/exhibition/delete/:id', (req, res) => {
   });
 });
 // --------------------------------------------------------------
+
 // --------------------ARTIFACT-EXHIBITION-----------------------
 // call stored procedure and fetch the artifacts under an exhibition
 app.get('/artifact-exhibition/fetch/:id', (req, res) => {
@@ -657,6 +658,49 @@ app.get('/artifact-exhibition/fetch/:id', (req, res) => {
 });
 
 // --------------------------------------------------------------
+
+// -------------------ARTIFACT-CATEGORY-VIEW---------------------
+
+app.get('/artifact-category/view', (req, res) => {
+  let qr1 = `DROP VIEW IF EXISTS ArtifactsPerCategory`;
+  db.query(qr1, (err1, result1) => {
+    if (err1) {
+      console.log(err1);
+      res.status(500).send('Internal server error');
+      return;
+    }
+
+    let qr2 = `CREATE VIEW ArtifactsPerCategory AS
+      SELECT c.category_id, c.name AS category_name, COUNT(*) AS num_artifacts
+      FROM ARTIFACT a
+      JOIN CATEGORY c ON a.category_id = c.category_id
+      GROUP BY c.category_id, c.name`;
+    db.query(qr2, (err2, result2) => {
+      if (err2) {
+        console.log(err2);
+        res.status(500).send('Internal server error');
+        return;
+      }
+
+      let qr3 = `SELECT * FROM ArtifactsPerCategory`;
+      db.query(qr3, (err3, result3) => {
+        if (err3) {
+          console.log(err3);
+          res.status(500).send('Internal server error');
+          return;
+        }
+
+        res.send({
+          message: 'Artifacts per category data retrieved successfully',
+          data: result3
+        });
+      });
+    });
+  });
+});
+
+// --------------------------------------------------------------
+
 // Listen on port 3000
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
