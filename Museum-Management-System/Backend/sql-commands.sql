@@ -174,6 +174,16 @@ BEGIN
     END IF;
 END //
 
+CREATE TRIGGER ensure_valid_artist_years_trigger_update
+BEFORE UPDATE ON ARTIST
+FOR EACH ROW
+BEGIN
+    IF NEW.birth_year >= NEW.death_year THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Artist birth year must be before the death year';
+    END IF;
+END //
+
 DELIMITER ;
 
 
@@ -183,6 +193,16 @@ DELIMITER //
 
 CREATE TRIGGER ensure_valid_exhibition_dates_trigger
 BEFORE INSERT ON EXHIBITION
+FOR EACH ROW
+BEGIN
+    IF NEW.start_date >= NEW.end_date THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Exhibition start date must be before the end date';
+    END IF;
+END //
+
+CREATE TRIGGER ensure_valid_exhibition_dates_trigger_update
+BEFORE UPDATE ON EXHIBITION
 FOR EACH ROW
 BEGIN
     IF NEW.start_date >= NEW.end_date THEN

@@ -89,7 +89,12 @@ app.post('/artist/add', (req, res) => {
   db.query(qr, (err, result) => {
     if (err) {
       console.log(err);
-      res.status(500).send('Internal server error');
+      if (err.sqlMessage == "Artist birth year must be before the death year") {
+        res.status(500).send(err.sqlMessage);
+      }
+      else {
+        res.status(500).send('Internal server error');
+      }
       return;
     }
     res.send({
@@ -112,7 +117,12 @@ app.put('/artist/update/:id', (req, res) => {
   db.query(qr, (err, result) => {
     if (err) {
       console.log(err);
-      res.status(500).send('Internal server error');
+      if (err.sqlMessage == "Artist birth year must be before the death year") {
+        res.status(500).send(err.sqlMessage);
+      }
+      else {
+        res.status(500).send('Internal server error');
+      }
       return;
     }
     res.send({
@@ -555,7 +565,12 @@ app.post('/exhibition/add', (req, res) => {
   db.query(qr, (err, result) => {
     if (err) {
       console.log(err);
-      res.status(500).send('Internal server error');
+      if (err.sqlMessage == "Exhibition start date must be before the end date") {
+        res.status(500).send(err.sqlMessage);
+      }
+      else {
+        res.status(500).send('Internal server error');
+      }
       return;
     }
     res.send({
@@ -578,7 +593,12 @@ app.put('/exhibition/update/:id', (req, res) => {
   db.query(qr, (err, result) => {
     if (err) {
       console.log(err);
-      res.status(500).send('Internal server error');
+      if (err.sqlMessage == "Exhibition start date must be before the end date") {
+        res.status(500).send(err.sqlMessage);
+      }
+      else {
+        res.status(500).send('Internal server error');
+      }
       return;
     }
     res.send({
