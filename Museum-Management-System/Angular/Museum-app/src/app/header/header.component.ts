@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-header',
   template: `
-  <div style="padding-top: 64px;">
+  <div style="padding-top: 50px;">
   <div class="navbar is-dark is-fixed-top">
     <div class="navbar-brand">
       <a class="navbar-item">

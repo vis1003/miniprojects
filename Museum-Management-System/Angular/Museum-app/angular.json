@@ -60,7 +60,11 @@
               "node_modules/bulma/css/bulma.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "./src/assets/p5.min.js",
+              "./src/assets/vanta.topology.min.js",
+              "./src/assets/three.min.js"
+            ]
           },
           "configurations": {
             "production": {

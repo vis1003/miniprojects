@@ -1,23 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+declare var VANTA: { TOPOLOGY: (arg0: { el: string; mouseControls: boolean; touchControls: boolean; gyroControls: boolean; minHeight: number; minWidth: number; scale: number; scaleMobile: number; }) => void; };
 
 @Component({
   selector: 'app-home',
-  template: `
-    <section class="hero is-fullheight-with-navbar">
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <h1 class="title">
-          MUSEUM MANAGEMENT SYSTEM
-        </h1>
-        <h2 class="subtitle">
-          An application to manage Museum Administration
-        </h2>
-      </div>
-    </div>
-  </section>
-  `,
+  templateUrl: './home.component.html',
   styles: ``
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+  name = 'Angular';
 
+  constructor() { }
+
+  ngOnInit(): void {
+    VANTA.TOPOLOGY({
+      el: "#vanta",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00
+    })
+  }
 }
