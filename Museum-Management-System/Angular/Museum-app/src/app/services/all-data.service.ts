@@ -26,13 +26,7 @@ export class AllDataService {
     return this.http.put(this.url + entity + '/update/' + id, data)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          console.error('Error updating data:', error);
-          // Check if the error has a message property and return it
-          if (error.error && error.error.message) {
-            return of(error.error.message);
-          }
-          // Otherwise, return a generic error message
-          return of('An error occurred while updating the data.');
+          return of(error.error);
         })
       );
   }

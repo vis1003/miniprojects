@@ -131,19 +131,23 @@ export class ArtistsComponent implements OnInit{
       formData.artist_death_year === ""
     ) {
       this.errorMessage = "Please Enter All Data!";
+      return;
     }
     console.log(formData);
-    this.artist.updateData(formData,'artist',artist_id).subscribe(
-    (result)=>{
-      console.log(result);
-      this.errorMessage = ""; // Clear the error message
-    },
-    (error) => {
-      console.error(error);
-      // Set the error message with the error from the server
-      this.errorMessage = error;
-    });
-    //window.location.reload();
+    this.artist.updateData(formData, 'artist', artist_id).subscribe(
+      (result) => {
+        console.log(result);
+        if (result == "Artist birth year must be before the death year")
+        {
+          this.errorMessage = result;
+          return;
+        }
+        else
+        {
+          this.errorMessage = "";
+           window.location.reload();
+        }
+      });
   }
 }
 
