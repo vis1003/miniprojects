@@ -28,7 +28,7 @@ export class CategoriesComponent implements OnInit{
   });
 
   editCategoryId: any = null;
-
+  errorMessage: string | null = null;
   categoryData: any=[];
 
   ngOnInit(): void {
@@ -62,7 +62,8 @@ SaveData() {
     formData.category_name === "" || 
     formData.category_description === ""
   ) {
-    alert("Please Enter All Data!");
+    this.errorMessage = "Please Enter All Data!";
+    return;
   }
   console.log(formData);
   this.category.saveData(formData,'category').subscribe((result)=>{
@@ -118,7 +119,8 @@ SaveData() {
     formData.category_name === "" || 
     formData.category_description === ""
     ) {
-      alert("Please Enter All Data!");
+      this.errorMessage = "Please Enter All Data!";
+      return;
     }
     console.log(formData);
     this.category.updateData(formData,'category',category_id).subscribe((result)=>{

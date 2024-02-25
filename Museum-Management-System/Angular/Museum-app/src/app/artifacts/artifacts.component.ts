@@ -202,7 +202,8 @@ export class ArtifactsComponent implements OnInit {
       formData.artifact_description === "" || 
       formData.artifact_name === ""
     ) {
-      alert("Please Enter All Data!");
+      this.errorMessage = "Please Enter All Data!";
+      return;
     }
     console.log(formData);
     console.log("artifact id:"+artifact_id)

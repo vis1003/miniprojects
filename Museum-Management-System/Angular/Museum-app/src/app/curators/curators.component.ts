@@ -28,7 +28,7 @@ export class CuratorsComponent implements OnInit{
   });
 
   editCuratorId: any = null;
-
+  errorMessage: string | null = null;
   curatorData: any=[];
 
   ngOnInit(): void {
@@ -62,7 +62,8 @@ SaveData() {
     formData.curator_name === "" || 
     formData.curator_email === ""
   ) {
-    alert("Please Enter All Data!");
+    this.errorMessage = "Please Enter All Data!";
+    return;
   }
   console.log(formData);
   this.curator.saveData(formData,'curator').subscribe((result)=>{
@@ -118,7 +119,8 @@ editData() {
     formData.curator_name === "" || 
     formData.curator_email === ""
   ) {
-    alert("Please Enter All Data!");
+    this.errorMessage = "Please Enter All Data!";
+    return;
   }
   console.log(formData);
   this.curator.updateData(formData,'curator',curator_id).subscribe((result)=>{
