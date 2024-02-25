@@ -32,7 +32,7 @@ export class ExhibitionsComponent implements OnInit{
   });
 
   editExhibitionId: any = null;
-
+  errorMessage: string | null = null;
   exhibitionData: any=[];
 
   ngOnInit(): void {
@@ -68,13 +68,23 @@ export class ExhibitionsComponent implements OnInit{
       formData.exhibition_end_date === "" ||
       formData.exhibition_location === ""
     ) {
-      alert("Please Enter All Data!");
+      this.errorMessage = "Please Enter All Data!";
+      return;
     }
     console.log(formData);
     this.exhibition.saveData(formData,'exhibition').subscribe((result)=>{
       console.log(result);
+      if (result == "Exhibition start date must be before the end date")
+        {
+          this.errorMessage = result;
+          return;
+        }
+        else
+        {
+          this.errorMessage = "";
+          window.location.reload();
+        }
     });
-    window.location.reload();
   }  
 
   deleteData(exhibition_id : any){
@@ -128,12 +138,22 @@ export class ExhibitionsComponent implements OnInit{
       formData.exhibition_end_date === "" ||
       formData.exhibition_location === ""
     ) {
-      alert("Please Enter All Data!");
+      this.errorMessage = "Please Enter All Data!";
+      return;
     }
     console.log(formData);
     this.exhibition.updateData(formData,'exhibition',exhibition_id).subscribe((result)=>{
       console.log(result);
+      if (result == "Exhibition start date must be before the end date")
+        {
+          this.errorMessage = result;
+          return;
+        }
+        else
+        {
+          this.errorMessage = "";
+          window.location.reload();
+        }
     });
-    window.location.reload();
   }
 }
