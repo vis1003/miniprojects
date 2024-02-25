@@ -38,6 +38,7 @@ export class ArtifactsComponent implements OnInit {
   });
   
   editArtifactId: any = null;
+  errorMessage: string | null = null;
 
   artifactData: any = [];
   artistData: any = [];
@@ -112,7 +113,8 @@ export class ArtifactsComponent implements OnInit {
       formData.artifact_description === "" || 
       formData.artifact_name === ""
     ) {
-      alert("Please Enter All Data!");
+      this.errorMessage = "Please Enter All Data!";
+      return;
     }
     console.log(formData);
     this.artifact.saveData(formData,'artifact').subscribe((result)=>{
