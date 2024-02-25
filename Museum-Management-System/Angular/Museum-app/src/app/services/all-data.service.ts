@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,18 @@ export class AllDataService {
     return this.http.get(this.url+entity+'/fetch/'+id)
   }
   updateData(data: any, entity: string, id: number) {
-    return this.http.put(this.url+entity+'/update/'+id,data)
+    return this.http.put(this.url + entity + '/update/' + id, data)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('Error updating data:', error);
+          // Check if the error has a message property and return it
+          if (error.error && error.error.message) {
+            return of(error.error.message);
+          }
+          // Otherwise, return a generic error message
+          return of('An error occurred while updating the data.');
+        })
+      );
   }
   getExhibitionData(id: number){
     return this.http.get(this.url+'artifact-exhibition/fetch/'+id)

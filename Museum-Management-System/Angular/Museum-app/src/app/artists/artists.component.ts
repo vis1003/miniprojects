@@ -32,6 +32,7 @@ export class ArtistsComponent implements OnInit{
   });
 
   editArtistId: any = null;
+  errorMessage: string | null = null;
 
   artistData: any=[];
 
@@ -68,7 +69,8 @@ export class ArtistsComponent implements OnInit{
       formData.artist_birth_year === "" || 
       formData.artist_death_year === "" 
     ) {
-      alert("Please Enter All Data!");
+      this.errorMessage = "Please Enter All Data!";
+      return;
     }
     console.log(formData);
     this.artist.saveData(formData,'artist').subscribe((result)=>{
@@ -128,13 +130,20 @@ export class ArtistsComponent implements OnInit{
       formData.artist_birth_year === "" || 
       formData.artist_death_year === ""
     ) {
-      alert("Please Enter All Data!");
+      this.errorMessage = "Please Enter All Data!";
     }
     console.log(formData);
-    this.artist.updateData(formData,'artist',artist_id).subscribe((result)=>{
+    this.artist.updateData(formData,'artist',artist_id).subscribe(
+    (result)=>{
       console.log(result);
+      this.errorMessage = ""; // Clear the error message
+    },
+    (error) => {
+      console.error(error);
+      // Set the error message with the error from the server
+      this.errorMessage = error;
     });
-    window.location.reload();
+    //window.location.reload();
   }
 }
 

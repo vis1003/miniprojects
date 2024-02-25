@@ -10,6 +10,12 @@
   <div class="modal-background"></div>
   <div class="modal-content has-background-white py-5 px-5">
     <h3 class="title mr-3">Add new Artist</h3>
+    <!-- error message -->
+    <div *ngIf="errorMessage" class="message is-danger">
+      <div class="message-body">
+        {{ errorMessage }}
+      </div>
+    </div>
     <!-- Form -->
     <form [formGroup]="addArtist" (ngSubmit)="SaveData()">
 
@@ -81,6 +87,11 @@
             <div class="modal-background" id="edit_background"></div>
             <div class="modal-content has-background-white py-5 px-5">
               <h3 class="title mr-3">Edit Artist</h3>
+              <!-- error message -->
+              <div *ngIf="errorMessage" class="notification is-danger">
+                <button class="delete" (click)="errorMessage = null"></button>
+                {{ errorMessage }}
+              </div>
               <!-- Form -->
               <form [formGroup]="editArtist" (ngSubmit)="editData()">
 
