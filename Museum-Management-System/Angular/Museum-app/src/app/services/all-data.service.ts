@@ -37,4 +37,7 @@ export class AllDataService {
   getExhibitionData(id: number){
     return this.http.get(this.url+'artifact-exhibition/fetch/'+id)
   }
+  getCategorySummary() {
+    return this.http.get(this.url+'artifact-category/view')
+  }
 }

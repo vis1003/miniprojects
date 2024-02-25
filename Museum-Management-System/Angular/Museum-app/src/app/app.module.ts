@@ -13,6 +13,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ArtifactExhibitionComponent } from './artifact-exhibition/artifact-exhibition.component';
+import { CategorySummaryComponent } from './category-summary/category-summary.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ArtifactExhibitionComponent } from './artifact-exhibition/artifact-exhi
     CuratorsComponent,
     ArtistsComponent,
     CategoriesComponent,
-    ArtifactExhibitionComponent
+    ArtifactExhibitionComponent,
+    CategorySummaryComponent
   ],
   imports: [
     BrowserModule,
