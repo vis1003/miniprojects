@@ -88,9 +88,10 @@
             <div class="modal-content has-background-white py-5 px-5">
               <h3 class="title mr-3">Edit Artist</h3>
               <!-- error message -->
-              <div *ngIf="errorMessage" class="notification is-danger">
-                <button class="delete" (click)="errorMessage = null"></button>
-                {{ errorMessage }}
+              <div *ngIf="errorMessage" class="message is-danger">
+                <div class="message-body">
+                  {{ errorMessage }}
+                </div>
               </div>
               <!-- Form -->
               <form [formGroup]="editArtist" (ngSubmit)="editData()">

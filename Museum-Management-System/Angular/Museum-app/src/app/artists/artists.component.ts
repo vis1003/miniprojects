@@ -75,8 +75,17 @@ export class ArtistsComponent implements OnInit{
     console.log(formData);
     this.artist.saveData(formData,'artist').subscribe((result)=>{
       console.log(result);
+      if (result == "Artist birth year must be before the death year")
+        {
+          this.errorMessage = result;
+          return;
+        }
+        else
+        {
+          this.errorMessage = "";
+          window.location.reload();
+        }
     });
-    window.location.reload();
   }
   
   deleteData(artist_id : any){

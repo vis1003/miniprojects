@@ -13,8 +13,12 @@ export class AllDataService {
     return this.http.get(this.url+entity+'/fetch')
   }
   saveData(data: any, entity:string){
-    console.log(data);
-    return this.http.post(this.url+entity+'/add',data)
+    return this.http.post(this.url + entity + '/add', data)
+    .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return of(error.error);
+        })
+      );
   }
   deleteData(id: any, entity: string){
     return this.http.delete(this.url+entity+'/delete/'+id)
