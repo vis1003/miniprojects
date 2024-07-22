@@ -1,2 +1,2 @@
-# miniprojects
-miniprojects created for college 
+# Miniprojects
+Miniprojects created for college 
